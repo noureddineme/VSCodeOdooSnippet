@@ -1,213 +1,215 @@
 {
 /*
-	 // Place your snippets for XML here. Each snippet is defined under a snippet name and has a prefix, body and 
-	 // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	 // $1, $2 for tab stops, ${id} and ${id:label} and ${1:label} for variables. Variables with the same id are connected.
-	 // Example:
-	 "Print to console": {
-		"prefix": "log",
-		"body": [
-			"console.log('$1');",
-			"$2"
-		],
-		"description": "Log output to console"
-	}
+     // Place your snippets for XML here. Each snippet is defined under a snippet name and has a prefix, body and 
+     // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+     // $1, $2 for tab stops, ${id} and ${id:label} and ${1:label} for variables. Variables with the same id are connected.
+     // Example:
+     "Print to console": {
+        "prefix": "log",
+        "body": [
+            "console.log('$1');",
+            "$2"
+        ],
+        "description": "Log output to console"
+    }
 */
 
-"Odoo Init": {
-		"prefix": "odoo_init",
-		"body": [
-			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
- 			"<openerp>",
-    		"	<data>",
-			"	<!--Begin your code here.-->",
-			"		${<!--To Do Code Here.-->}",
-			"	<!--End of coding here.-->",
-    		"	</data>",
-			"</openerp>"
-		],
-		"description": "Odoo initialize"
-	},
-	
-	"Odoo View Action": {
-		"prefix": "odoo_view_action",
-		"body": [
-			"",
-			"<!--${module_title} Action-->",
-			"<record model=\"ir.actions.act_window\" id=\"${module}_action\">",
-            "	<field name=\"name\">${module}</field>",
-            "	<field name=\"res_model\">${module}</field>",
-            "	<field name=\"view_type\">form</field>",
-            "	<field name=\"view_mode\">tree,form</field>",
-            "	<field name=\"help\" type=\"html\">",
-            "		<p class=\"oe_view_nocontent_create\">",
-            "			Create the first ${module_title}",
-            "		</p>",
-            "	</field>",
-        	"</record>"
-		],
-		"description": "Odoo Action View"
-	},
-	
-	"Odoo View Mode": {
-		"prefix": "odoo_view_mode",
-		"body": [
-			"<field name=\"view_mode\">search,form,${tree},${kanban}</field>"
-		],
-		"description": "Odoo View Mode"
-	},
-	
-	"Odoo Domain": {
-		"prefix": "odoo_domain",
-		"body": [
-			" <field name=\"domain\">[('${field}', '${ilike}', '${value}')]</field>"
-		],
-		"description": "Odoo Domain"
-	},
-	
-	"Odoo Context": {
-		"prefix": "odoo_domain",
-		"body": [
-			" <field name=\"context\">{\"search_default\":'${efault_filter}',\"action_default\":'${action_filter}'}</field>"
-		],
-		"description": "Odoo Context"
-	},      
-	
-	"Odoo View Form": {
-		"prefix": "odoo_view_form",
-		"body": [
-			"",
-			"<!--${module_title} Form-->",
-			"<record model=\"ir.ui.view\" id=\"${module}_form\">",
-            "	<field name=\"name\">${module}</field>",
-            "	<field name=\"res_model\">${module}</field>",
-            "	<field name=\"type\">form</field>",
-            "	<field name=\"arch\" type=\"xml\">",
-            "		<form string=\"${module_title}\">",
-            "			<sheet>",
-			"			<!--Begin your code here.-->",
-			"				${<!--To Do Code Here.-->}",
-			"			<!--End of coding here.-->",
-            "			</sheet>",
-            "		</form>",
-            "	</field>",
-        	"</record>"
-		],
-		"description": "Odoo Form View"
-	},
-	
-	"Odoo View Search": {
-		"prefix": "odoo_view_search",
-		"body": [
-			"",
-			"<!--${module_title} Search-->",      
-        	"<record model=\"ir.ui.view\" id=\"${module}_search\">",
-            "	<field name=\"name\">${module}</field>",
-            "	<field name=\"model\">${module}</field>",
-            "	<field name=\"type\">search</field>",
-            "	<field name=\"arch\" type=\"xml\">",
-            " 		<search string=\"${module_title}\">",
-			"			<!--Begin your code here.-->",
-			"				${<!--To Do Code Here.-->}",
-			"			<!--End of coding here.-->",
-            "   	</search>",
-            "	</field>",
-        	"</record>"
-		],
-		"description": "Odoo Search View"
-	},
-	
-	"Odoo View Tree": {
-		"prefix": "odoo_view_tree",
-		"body": [
-			"",
-			"<!--${module_title} Tree-->",
-			"<record model=\"ir.ui.view\" id=\"${module}_tree\">",
-            "	<field name=\"name\">${module}</field>",
-            "	<field name=\"res_model\">${module}</field>",
-            "	<field name=\"arch\" type=\"xml\">",
-            "		<tree string=\"${module_title}\">",
-			"			<!--Begin your code here.-->",
-			"				${<!--To Do Code Here.-->}",
-			"			<!--End of coding here.-->",
-            "		</tree>",
-            "	</field>",
-        	"</record>"
-		],
-		"description": "Odoo Tree View"
-	},
-	
-	"Odoo Menu Parent": {
-		"prefix": "odoo_menu_parent",
-		"body": [
-			"",
-			"<menuitem id=\"${module}_menu\" name=\"${Menu Name}\" parent=\"${parent_module}.${module}\" sequence =\"${seq}\"/>"
-		],
-		"description": "Odoo Parent Menu"
-	},
-	
-	"Odoo Menu": {
-		"prefix": "odoo_menu",
-		"body": [
-			"",
-			"<menuitem ",
-			"id=\"${module}_menu\"",
-			"name=\"${Menu Name}\"",
-			"parent=\"${parent_module}.${module}\"",
+	"Odoo Init": {
+        "prefix": "odoo_init",
+        "body": [
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+             "<odoo>",
+            "    <!--Begin your code here.-->",
+            "    ${<!--To Do Code Here.-->}",
+            "    <!--End of coding here.-->",
+            "</odoo>"
+        ],
+        "description": "Odoo initialize"
+    },
+    
+    "Odoo View Action": {
+        "prefix": "odoo_view_action",
+        "body": [
+            "",
+            "<!--${module_title} Action-->",
+            "<record id=\"action_${module}\" model=\"ir.actions.act_window\">",
+            "    <field name=\"name\">${module}</field>",
+            "    <field name=\"res_model\">${module}</field>",
+            "    <field name=\"view_type\">form</field>",
+            "    <field name=\"view_mode\">tree,form</field>",
+            "    <field name=\"help\" type=\"html\">",
+            "        <p class=\"oe_view_nocontent_create\">",
+            "            Create the first ${module_title}",
+            "        </p>",
+            "    </field>",
+            "</record>"
+        ],
+        "description": "Odoo Action View"
+    },
+    
+    "Odoo Domain": {
+        "prefix": "odoo_domain",
+        "body": [
+            " <field name=\"domain\">[('${field}', '${ilike}', '${value}')]</field>"
+        ],
+        "description": "Odoo Domain"
+    },
+    
+    "Odoo Context": {
+        "prefix": "odoo_context",
+        "body": [
+            " <field name=\"context\">{\"search_default\":'${efault_filter}',\"action_default\":'${action_filter}'}</field>"
+        ],
+        "description": "Odoo Context"
+    },      
+    
+    "Odoo View Form": {
+        "prefix": "odoo_view_form",
+        "body": [
+            "",
+            "<!--${module_title} Form-->",
+            "<record id=\"${module}_form\" model=\"ir.ui.view\">",
+            "    <field name=\"name\">${module}.form</field>",
+            "    <field name=\"res_model\">${module}</field>",
+            "    <field name=\"type\">form</field>",
+            "    <field name=\"arch\" type=\"xml\">",
+            "        <form string=\"${module_title}\">",
+            "            <sheet>",
+            "                <!--Begin your code here.-->",
+            "                ${<!--To Do Code Here.-->}",
+            "                <!--End of coding here.-->",
+            "            </sheet>",
+            "        </form>",
+            "    </field>",
+            "</record>"
+        ],
+        "description": "Odoo Form View"
+    },
+    
+    "Odoo View Search": {
+        "prefix": "odoo_view_search",
+        "body": [
+            "",
+            "<!--${module_title} Search-->",      
+            "<record id=\"${module}_search\" model=\"ir.ui.view\">",
+            "    <field name=\"name\">${module}.search</field>",
+            "    <field name=\"model\">${module}</field>",
+            "    <field name=\"type\">search</field>",
+            "    <field name=\"arch\" type=\"xml\">",
+            "         <search string=\"${module_title}\">",
+            "            <!--Begin your code here.-->",
+            "                ${<!--To Do Code Here.-->}",
+            "            <!--End of coding here.-->",
+            "       </search>",
+            "    </field>",
+            "</record>"
+        ],
+        "description": "Odoo Search View"
+    },
+    
+    "Odoo View Tree": {
+        "prefix": "odoo_view_tree",
+        "body": [
+            "",
+            "<!--${module_title} Tree-->",
+            "<record id=\"${module}_tree\" model=\"ir.ui.view\">",
+            "    <field name=\"name\">${module}.tree</field>",
+            "    <field name=\"res_model\">${module}</field>",
+            "    <field name=\"arch\" type=\"xml\">",
+            "        <tree string=\"${module_title}\">",
+            "            <!--Begin your code here.-->",
+            "                ${<!--To Do Code Here.-->}",
+            "            <!--End of coding here.-->",
+            "        </tree>",
+            "    </field>",
+            "</record>"
+        ],
+        "description": "Odoo Tree View"
+    },
+    
+    "Odoo Menu Parent": {
+        "prefix": "odoo_menu_root",
+        "body": [
+            "",
+            "<menuitem id=\"${module}_menu\" ",
+			"    name=\"${Menu Name}\"",
+			"    sequence =\"${seq}\"",
+			"    web_icon=\"${module},static/description/icon.png\"",
 			"/>"
-		],
-		"description": "Odoo Menu"
-	},
-	
-	"Odoo Inherit": {
-		"prefix": "odoo_inherit",
-		"body": [
-			"<!--requires model, not res_model-->",
-			"<!--<field name=\"model\">${module}</field>-->",
-			"<field name=\"inherit_id\" ref=\"${module}\"/>",
-    		"<field name=\"arch\" type=\"xml\">",
-			"<!--to insert, replace or remove fields or view-->",
-        	"	<!--<xpath expr=\"//field[@name='${field}']\" position=\"${pos}\">",
-          	"		<field name=\"${name}\"/>",
-        	"	</xpath>-->",
-    		"</field>"
-		],
-		"description": "Odoo View Inherit"
-	},
-	
-	"Odoo Button": {
-		"prefix": "odoo_button",
-		"body": [
-			"<button name=\"${action}\" type=\"object\"",
-          	"					string=\"${title}\"",
-            "                   states=\"${state}\"/>\""
-		],
-		"description": "Odoo button"
-	},
-	
-	"Odoo View Kanvan": {
-		"prefix": "odoo_view_kanvan",
-		"body": [
-			"",
-			"<!--${module_title} Form-->",
-			"<record model=\"ir.ui.view\" id=\"${module}_kanban_view\">",
-        "    <field name=\"name\">${module}.kanban</field>",
-        "    <field name=\"model\">${module}</field>",
-        "    <field name=\"arch\" type=\"xml\">",
-        "        <kanban default_group_by=\"department_id\">",
-        "            <field name=\"color\"/>",
-        "            <templates>",
-        "                <t t-name=\"kanban-box\">",
-		"					<!--Begin your code here.-->",
-		"					${<!--To Do Code Here.-->}",
-		"				<!--End of coding here.-->",
-        "                </t>",
-        "            </templates>",
-        "        </kanban>",
-        "    </field>",
-        "</record>"
-		],
-		"description": "Odoo Kanvan View"
-	}
- 
+        ],
+        "description": "Odoo Parent Menu"
+    },
+    
+    "Odoo Menu": {
+        "prefix": "odoo_menu",
+        "body": [
+            "",
+            "<menuitem id=\"${module}_menu\"",
+            "    name=\"${Menu Name}\"",
+            "    parent=\"${parent_module}.${module}\"",
+			"    action=\"${action_id}\"",
+            "/>"
+        ],
+        "description": "Odoo Menu"
+    },
+    
+    "Odoo Inherit": {
+        "prefix": "odoo_inherit",
+        "body": [
+            "<!--requires model, not res_model-->",
+            "<!--<field name=\"model\">${module}</field>-->",
+            "<field name=\"inherit_id\" ref=\"${module}\"/>",
+            "<field name=\"arch\" type=\"xml\">",
+            "<!--to insert, replace or remove fields or view-->",
+            "    <!--<xpath expr=\"//field[@name='${field}']\" position=\"${pos}\">",
+              "        <field name=\"${name}\"/>",
+            "    </xpath>-->",
+            "</field>"
+        ],
+        "description": "Odoo View Inherit"
+    },
+    
+    "Odoo Button": {
+        "prefix": "odoo_button",
+        "body": [
+            "<button name=\"${action}\"",
+			"    type=\"object\"",
+            "    string=\"${title}\"",
+            "    states=\"${state}\"/>"
+        ],
+        "description": "Odoo button"
+    },
+    
+    "Odoo View Kanvan": {
+        "prefix": "odoo_view_kanvan",
+        "body": [
+            "",
+            "<!--${module_title} Form-->",
+            "<record id=\"${module}_kanban_view\" model=\"ir.ui.view\">",
+			"    <field name=\"name\">${module}.kanban</field>",
+			"    <field name=\"model\">${module}</field>",
+			"    <field name=\"arch\" type=\"xml\">",
+			"        <kanban default_group_by=\"department_id\">",
+			"            <field name=\"color\"/>",
+			"            <templates>",
+			"                <t t-name=\"kanban-box\">",
+			"                    <!--Begin your code here.-->",
+			"                    ${<!--To Do Code Here.-->}",
+			"                <!--End of coding here.-->",
+			"                </t>",
+			"            </templates>",
+			"        </kanban>",
+			"    </field>",
+			"</record>"
+        ],
+        "description": "Odoo Kanvan View"
+    },
+
+	"Odoo Field": {
+        "prefix": "odoo_field",
+        "body": [
+            "<field name=\"${field_name}\" ${}/>"
+        ],
+        "description": "Odoo Field"
+    }
 }
