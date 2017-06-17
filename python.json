@@ -16,17 +16,10 @@
 	"Odoo Import": {
 		"prefix": "odoo_import",
 		"body": [
-			"from openerp import models, fields, api, exceptions"
+			"from odoo import api, fields, models, tools, SUPERUSER_ID, _",
+			"from odoo.exceptions import UserError, ValidationError"
 		],
 		"description": "Odoo ORM Standard Import"
-	},
-	
-	"Odoo Import Raise": {
-		"prefix": "odoo_import_raise",
-		"body": [
-			"from openerp.exceptions import ValidationError"
-		],
-		"description": "Odoo ORM Import for Raise Method"
 	},
 	
 	"Odoo Raise": {
@@ -38,199 +31,250 @@
 	},
 	
 	"Odoo Class": {
-		"prefix": "class",
+		"prefix": "odoo_class",
 		"body": [
 			"class ${class_name}(models.Model):",
-			"	_name = '${module_name}'",
+			"    _name = '${model_name}'",
+			"    _description = '${model_description}'",
 			"",
-			"	${field_name} = fields.Char(string = '${string}')"
+			"    name = fields.${type}(",
+			"        string = '${string}',",
+			"    )"
 		],
 		"description": "Odoo ORM Class"
 	},
 	
-	"Odoo Class Definition": {
-		"prefix": "odoo_class",
-		"body": [
-			"class ${class_name}(models.Model):",
-			"	_name = '${module_name}'",
-			"",
-			"	${field_name} = fields.Char(string = '${string}')"
-		],
-		"description": "Odoo ORM Class Definition"
-	},
-	
+
 	"Odoo Class Inherit Definition": {
 		"prefix": "odoo_class_inherit",
 		"body": [
 			"class ${class_name}(models.Model):",
-			"	_inherit = '${parent_module_name}'",
+			"    _inherit = '${parent_module_name}'",
 			"",
-			"	${field_name} = fields.Char(string = '${string}')"
+			"    ${field_name} = fields.${type}(",
+			"        string = '${string}',",
+			"    )"
 		],
-		"description": "Odoo ORM Class Definition"
+		"description": "Odoo Class Inherit Definition"
 	},
 	
 	"Odoo Class Name and Inherit Definition": {
 		"prefix": "odoo_class_name_inherit",
 		"body": [
 			"class ${class_name}(models.Model):",
-			"	_inherit = '${parent_module_name}'",
-			"	_name = '${module_name}'",
+			"    _inherit = '${parent_module_name}'",
+			"    _name = '${module_name}'",
 			"",
-			"	${field_name} = fields.Char(string = '${string}')"
+			"    ${field_name} = fields.${type}(",
+			"        string = '${string}',",
+			"    )"
 		],
-		"description": "Odoo ORM Class Definition"
-	},
-	
-	"Odoo Character field Definition": {
-		"prefix": "fields.Char",
-		"body": [
-				"fields.Char(string = '${string}')"
-		],
-		"description": "Odoo ORM Character Definiton"
-	},
-	
-	"Odoo Fields.Many2One field Definition": {
-		"prefix": "fields.Many2one",
-		"body": [
-				"fields.Many2one('${module}',string='${string}', default=_${method_name})"
-		],
-		"description": "Odoo ORM Many2One Definiton"
+		"description": "Odoo Class Name and Inherit Definition"
 	},
 	
 	"Odoo Fields.Datetime field Definition": {
 		"prefix": "fields.Datetime",
 		"body": [
-				"fields.Datetime(string='${string}', default=_${method_name})"
+				"fields.Datetime(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=fields.Datetime.now(),",
+				"    help=${5:False},",
+				")"
 		],
 		"description": "Odoo ORM Datetime Definiton"
+	},
+
+	"Odoo Fields.Date field Definition": {
+		"prefix": "fields.Date",
+		"body": [
+				"fields.Datet(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=fields.Datet.today(),",
+				"    help=${5:False},",
+				")"
+		],
+		"description": "Odoo ORM Datet Definiton"
+	},
+
+	"Odoo Character field Definition": {
+		"prefix": "fields.Char",
+		"body": [
+				"fields.Char(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=${5:None},",
+				"    help=${6:False},",
+				"    size=${7:50},",
+				"    translate=${8:True},",
+				")"
+		],
+		"description": "Odoo ORM Character Definiton"
 	},
 	
 	"Odoo Fields.Text field Definition": {
 		"prefix": "fields.Text",
 		"body": [
-				"fields.Text(string='${string}')"
+				"fields.Text(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=${5:None},",
+				"    help=${6:False},",
+				"    translate=${7:True},",
+				")"
 		],
 		"description": "Odoo ORM Text Definiton"
 	},
 	
-	"Odoo Fields.Float field Definition": {
-		"prefix": "fields.Float",
+	"Odoo Fields.Html field Definition": {
+		"prefix": "fields.Html",
 		"body": [
-				"fields.Float(string='${string}', digits=(${len},${dec}))"
+				"fields.Html(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=${5:None},",
+				"    help=${6:False},",
+				"    translate=${7:True},",
+				")"
 		],
-		"description": "Odoo ORM Float Definiton"
-	},
-	
-	"Odoo Fields.One2Many field Definition": {
-		"prefix": "fields.One2Many",
-		"body": [
-				"fields.One2Many('${child_module}','${child_field}',string='${string}')"
-		],
-		"description": "Odoo ORM Float Definiton"
+		"description": "Odoo ORM Html Definiton"
 	},
 	
 	"Odoo Fields.Integer field Definition": {
 		"prefix": "fields.Integer",
 		"body": [
-				"fields.Integer(string='${string}')"
+				"fields.Char(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=${5:0},",
+				"    help=${6:False},",
+				")"
 		],
 		"description": "Odoo ORM Integer Definiton"
+	},
+	
+	"Odoo Fields.Float field Definition": {
+		"prefix": "fields.Float",
+		"body": [
+				"fields.Float(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=${5:0.0},",
+				"    digits=(${7:16},${8:2})",
+				"    help=${6:False},",
+				")"
+		],
+		"description": "Odoo ORM Float Definiton"
 	},
 	
 	"Odoo Fields.Selection field Definition": {
 		"prefix": "fields.Selection",
 		"body": [
-				"fields.Selection([('${draft}','${Draft}'),",
-                              "('${confirm}','${Confirmed}'),",
-                              "('${void}','${Void}')],",
-                             "string='${Status}', default='${draft}')"
+				"fields.Selection(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=${5:None},",
+				"    help=${6:False},",
+				"    selection=[",
+				"        ('${7:valor1}', '${7:valor1}'),",
+				"        ('${8:valor2}', '${8:valor2}'),${9}",
+				"    ],",
+				")"
 		],
 		"description": "Odoo ORM Selection Definiton"
+	},
+	
+	"Odoo Fields.One2Many field Definition": {
+		"prefix": "fields.One2Many",
+		"body": [
+				"fields.One2Many(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=${5:None},",
+				"    help=${6:False},",
+				"    comodel_name='${7:model.name}',",
+				"    inverse_name='${8:inverse_field}'",
+				"    domain=[${9}],",
+				"    context={${10}},",
+				"    auto_join=${11:False},",
+				"    limit=${12:None},",
+				")"
+		],
+		"description": "Odoo ORM One2Many Definiton"
+	},
+	
+	"Odoo Fields.Many2One field Definition": {
+		"prefix": "fields.Many2one",
+		"body": [
+				"fields.Many2one(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=${5:None},",
+				"    help=${6:False},",
+				"    comodel_name='${7:model.name}',",
+				"    domain=[${8}],",
+				"    context={${9}},",
+				"    ondelete='${10:restrict}',",
+				"    auto_join=${11:False},",
+				")"
+		],
+		"description": "Odoo ORM Many2One Definiton"
+	},
+	
+	"Odoo Fields.Many2many field Definition": {
+		"prefix": "fields.Many2many",
+		"body": [
+				"fields.Many2many(",
+				"    string='${1:Field Name}',",
+				"    readonly=${3:False},",
+				"    help=${4:False},",
+				"    comodel_name='${5:model.name}',",
+				"    relation='${6:model_name_this_model_rel}',",
+				"    column1='${7:model_name_id}',",
+				"    column2='${8:this_model_id}',",
+				"    domain=[${9}],",
+				"    context={${10}},",
+				"    limit=None",
+				")"
+		],
+		"description": "Odoo ORM Many2many Definiton"
 	},
 	
 	"Odoo Fields.Boolean field Definition": {
 		"prefix": "fields.Boolean",
 		"body": [
-				"fields.Boolean(string='${String}')"
-		],
-		"description": "Odoo ORM Selection Definiton"
-	},
-	
-	"Odoo Fields Character field Definition": {
-		"prefix": "odoo_char",
-		"body": [
-				"${field_name} = fields.Char(string = '${string}')"
-		],
-		"description": "Odoo ORM Character Definiton"
-	},
-	
-	"Odoo Many2One field Definition": {
-		"prefix": "odoo_many2one",
-		"body": [
-				"${field_name}_id = fields.Many2One('${module}',string='${string}', default=_${method_name})"
-		],
-		"description": "Odoo ORM Many2One Definiton"
-	},
-	
-	"Odoo Datetime field Definition": {
-		"prefix": "odoo_datetime",
-		"body": [
-				"${field_name} = fields.Datetime(string='${string}', default=_${method_name})"
-		],
-		"description": "Odoo ORM Datetime Definiton"
-	},
-	
-	"Odoo Text field Definition": {
-		"prefix": "odoo_text",
-		"body": [
-				"${field_name} = fields.Text(string='${string}')"
-		],
-		"description": "Odoo ORM Text Definiton"
-	},
-	
-	"Odoo Float field Definition": {
-		"prefix": "odoo_float",
-		"body": [
-				"${field_name} = fields.Float(string='${string}', digits=(${len},${dec}))"
-		],
-		"description": "Odoo ORM Float Definiton"
-	},
-	
-	"Odoo One2Many field Definition": {
-		"prefix": "odoo_one2many",
-		"body": [
-				"${field_name}_ids = fields.One2Many('${child_module}','${child_field}',string='${string}')"
-		],
-		"description": "Odoo ORM Float Definiton"
-	},
-	
-	"Odoo Integer field Definition": {
-		"prefix": "odoo_integer",
-		"body": [
-				"${field_name} = fields.Integer(string='${string}')"
-		],
-		"description": "Odoo ORM Integer Definiton"
-	},
-	
-	"Odoo Selection field Definition": {
-		"prefix": "odoo_selection",
-		"body": [
-				"${state} = fields.Selection([('${draft}','${Draft}'),",
-                              "('${confirm}','${Confirmed}'),",
-                              "('${void}','${Void}')],",
-                             "string='${Status}', default='${draft}')"
-		],
-		"description": "Odoo ORM Selection Definiton"
-	},
-	
-	"Odoo Boolean field Definition": {
-		"prefix": "odoo_boolean",
-		"body": [
-				"${state} = fields.Boolean([string='${string}')"
+				"fields.Boolean(",
+				"    string='${1:Field Name}',",
+				"    required=${2:False},",
+				"    readonly=${3:False},",
+				"    index=${4:False},",
+				"    default=${5:None},",
+				"    help=${6:False},"
 		],
 		"description": "Odoo ORM Boolean Definiton"
 	},
+	
 	
 	"Odoo Inherit": {
 		"prefix": "odoo_inherit",
@@ -251,7 +295,7 @@
 	"Odoo Related": {
 		"prefix": "odoo_related",
 		"body": [
-				", related = '${one2many}_id.${parent_field}'"
+				", related='${one2many}_id.${parent_field}'"
 		],
 		"description": "Odoo Related"
 	},
@@ -261,7 +305,7 @@
 		"body": [
 				"@api.model",
     			"def create(self, vals):",
-				"	${#To Do Code Here.}"
+				"    ${#To Do Code Here.}"
 		],
 		"description": "Odoo Create Method using decorator"
 	},
@@ -271,7 +315,7 @@
 		"body": [
 				"@api.multi",   
     			"def write(self, vals):",
-				"	${#To Do Code Here.}"
+				"    ${#To Do Code Here.}"
 		],
 		"description": "Odoo Write Method using decorator"
 	},
@@ -279,9 +323,8 @@
 	"Odoo Search": {
 		"prefix": "odoo_search",
 		"body": [
-				"def _search(self, cr, uid, args, offset=0, limit=None, order=None,",
-        			"context={}, count=False, access_rights_uid=None):",
-				"	${#To Do Code Here.}"
+				"def _search(self, operator, value):",
+				"    ${#To Do Code Here.}"
 		],
 		"description": "Odoo Search Method using decorator"
 	},
@@ -289,19 +332,19 @@
 	"Odoo Onchange": {
 		"prefix": "odoo_onchange",
 		"body": [
-				"@api.onchange('${field}_id')", 
-    			"def _${field}_id(self):",
-				"	${#To Do Code Here.}"
+				"@api.onchange('${fields}')", 
+    			"def _onchange_${field}(self):",
+				"    ${#To Do Code Here.}"
 		],
 		"description": "Odoo Onchange Method using decorator"
 	},
 	
 	"Odoo State": {
-		"prefix": "odoo_state",
+		"prefix": "odoo_action_state",
 		"body": [
 				"@api.multi",
     			"def action_${state}(self):",
-				"	${#To Do Code Here.}"
+				"    ${#To Do Code Here.}"
 		],
 		"description": "Odoo State Method using decorator"
 	},
@@ -342,7 +385,7 @@
 		"prefix": "odoo_for_in",
 		"body": [
             "for ${record} in ${result}:",
-            "	${#To Do Code here}"
+            "    ${#To Do Code here}"
 		],
 		"description": "Odoo For In Statement"
 	},
